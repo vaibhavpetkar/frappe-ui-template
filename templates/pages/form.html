@@ -1,0 +1,128 @@
+<!-- Form Template -->
+<div class="form-container">
+  <div class="form-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="form-title">{{ doctype }} {{ doc.name }}</h1>
+      <div class="form-actions">
+        <button class="btn btn-secondary mr-2">Cancel</button>
+        <button class="btn btn-primary">Save</button>
+      </div>
+    </div>
+    <div class="form-status">
+      <span class="badge badge-{{ doc.status_color }}">{{ doc.status }}</span>
+    </div>
+  </div>
+  
+  <div class="form-body">
+    <!-- Form Sections -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="card-title">General Information</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- Field 1 -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label" for="field_name">Field Label</label>
+              <input type="text" class="form-control" id="field_name" name="field_name" value="{{ doc.field_name }}">
+              <small class="form-text text-muted">Help text for this field</small>
+            </div>
+          </div>
+          
+          <!-- Field 2 -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label" for="another_field">Another Field</label>
+              <select class="form-control" id="another_field" name="another_field">
+                <option value="option1" {% if doc.another_field == "option1" %}selected{% endif %}>Option 1</option>
+                <option value="option2" {% if doc.another_field == "option2" %}selected{% endif %}>Option 2</option>
+                <option value="option3" {% if doc.another_field == "option3" %}selected{% endif %}>Option 3</option>
+              </select>
+            </div>
+          </div>
+          
+          <!-- Field 3 -->
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="form-label" for="description">Description</label>
+              <textarea class="form-control" id="description" name="description" rows="3">{{ doc.description }}</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Another Form Section -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="card-title">Additional Details</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- Field 4 -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label" for="date_field">Date</label>
+              <input type="date" class="form-control" id="date_field" name="date_field" value="{{ doc.date_field }}">
+            </div>
+          </div>
+          
+          <!-- Field 5 -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label" for="number_field">Amount</label>
+              <input type="number" class="form-control" id="number_field" name="number_field" value="{{ doc.number_field }}">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Child Table Section -->
+    <div class="card">
+      <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 class="card-title">Items</h2>
+          <button class="btn btn-sm btn-primary add-row-btn">Add Row</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Rate</th>
+                <th>Amount</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in doc.items %}
+              <tr>
+                <td>
+                  <input type="text" class="form-control form-control-sm" name="items[{{ loop.index0 }}][item_code]" value="{{ item.item_code }}">
+                </td>
+                <td>
+                  <input type="number" class="form-control form-control-sm" name="items[{{ loop.index0 }}][qty]" value="{{ item.qty }}">
+                </td>
+                <td>
+                  <input type="number" class="form-control form-control-sm" name="items[{{ loop.index0 }}][rate]" value="{{ item.rate }}">
+                </td>
+                <td>
+                  <input type="number" class="form-control form-control-sm" name="items[{{ loop.index0 }}][amount]" value="{{ item.amount }}" readonly>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-danger delete-row-btn">Delete</button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
