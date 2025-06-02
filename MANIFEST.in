@@ -1,0 +1,22 @@
+include *.py
+include *.json
+include *.md
+include *.html
+include *.css
+include *.js
+include *.svg
+include *.png
+include *.jpg
+include *.ico
+
+recursive-include frappe_ui_template *.py
+recursive-include frappe_ui_template *.css
+recursive-include frappe_ui_template *.scss
+recursive-include frappe_ui_template *.js
+recursive-include frappe_ui_template *.html
+recursive-include frappe_ui_template *.svg
+recursive-include frappe_ui_template *.png
+recursive-include frappe_ui_template *.jpg
+recursive-include frappe_ui_template *.ico
+recursive-include frappe_ui_template *.md
+recursive-include frappe_ui_template *.json
